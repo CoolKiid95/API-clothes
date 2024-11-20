@@ -1,0 +1,16 @@
+{
+  "name": "api-clothes",
+  "version": "1.0.0",
+  "description": "API para pagina de ropa",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js"
+  },
+  "author": "CoolKiid95",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.1"
+  }
+}
