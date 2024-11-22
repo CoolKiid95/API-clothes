@@ -1,8 +1,15 @@
 const userModel = require("../models/users.model")
 exports.getusers=async(req,res)=>{
     try {
-        let data = await userModel.find()
-        res.status(200).json(data)
+        let roll = req.usuario.roll     
+        if (roll == "SuperAdmin") {
+            let data = await userModel.find()
+            res.status(200).json(data)
+        }else{
+            res.status(500).send({error: "Roll no es el correcto"})
+        }
+        
+        
     } catch (error) {
         console.log(error);
         res.status(500).send({error:"Ha ocurrido un error comunicate con el admin"})
@@ -43,5 +50,42 @@ exports.addUser=async(req,res)=>{
   }
 }
 exports.deleteUser=async(req,res)=>{
-
+    try {
+        let id = await req.params.id
+        if (id.length == 24) {
+            let user = await userModel.findById({_id: id})
+            if (user) {
+                let deleteduser= await userModel.findOneAndDelete({_id:id})
+                console.log("Usuario eliminado correctamente");
+                res.status(200).json(deleteduser)
+            }else{
+                console.log("Usuario no encontrado");
+                res.send({error:"Usuario no encontrado"})
+            }
+        }else{
+            res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({error:"ha ocurrido un error comunicate con el admin"})
+    }
+}
+exports.updateUser=async(req,res)=>{
+    try {
+        let id = await req.params.id
+        let body = req.body
+        if (id.length == 24) {
+            let user = await userModel.findById(id)
+            if (user) {
+                Object.assign(user, body)
+                await userModel.findOneAndUpdate({_id:id}, user)
+                res.status(200).send("Usuario modificado correctamente")
+            }
+        }else{
+            res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
+    }
 }

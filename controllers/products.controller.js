@@ -28,9 +28,15 @@ exports.getOneProduct=async(req,res)=>{
 }
 exports.addProduct=async(req,res)=>{
     try {
-        let newProduct = new productModel(product);
-        await newProduct.save();
-        res.json(newProduct);
+        let product = req.body
+        let roll = req.usuario.roll
+        if (roll == ("user")|| ("SuperAdmin")) {
+            let newProduct = new productModel(product);
+            await newProduct.save();
+            res.json(newProduct);
+        }else{
+            res.status(500).send({error: "Roll no es el correcto"})
+        }
     } catch (error) {
         console.log(error);
         res.send({ error: "Ha ocurrido algo inesperado, comuncate con el admin" });
@@ -53,5 +59,24 @@ exports.deleteProduct=async(req,res)=>{
     } catch (error) {
         console.log(error);
     res.send({ error: "Ha ocurrido algo inesperado, comuncate con el admin" });
+    }
+}
+exports.updateProduct=async(req,res)=>{
+    try {
+        let id = await req.params.id
+        let body = req.body
+        if (id.length==24) {
+            let product = await productModel.findById(id)
+            if (product) {
+                Object.assign(product, body)
+                await productModel.findOneAndUpdate({_id:id})
+                res.status(200).send("producto modificado")
+            }
+        }else{
+            res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
     }
 }

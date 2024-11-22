@@ -21,8 +21,17 @@ const userModel = mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    roll:{
+        type:String,
+        required:true,
+        default:"User"
     }
-})
+},{
+    versioKey: false,
+    timestamps:true
+}
+)
 
 module.exports=mongoose.model('user', userModel)
 
@@ -33,7 +42,8 @@ module.exports=mongoose.model('user', userModel)
     "apellido":"Delgado",
     "email":"diegoal.delgado@gmail.com",
     "password":"asdfasdf1*",
-    "telefono":"3125302489"
+    "telefono":"3125302489",
+    "roll":"SuperAdmin"
 }
 
     */
