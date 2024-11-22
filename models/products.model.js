@@ -32,6 +32,11 @@ const productModel = mongoose.Schema({
     talla:{
         type:Number,
         required:false
+    }, 
+    owner:{
+        type:String,
+        required:false,
+        default:"asd"
     }
 })
 module.exports = mongoose.model('product', productModel)

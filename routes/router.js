@@ -8,7 +8,7 @@ router.get('/product/:id', productsController.getOneProduct)
 router.post('/addproduct',tokenverification, productsController.addProduct)
 router.delete('/deleteproduct/:id',tokenverification,productsController.deleteProduct)
 router.put('/updateproduct', tokenverification,productsController.updateProduct)
-
+router.get('/myproducts/:id',tokenverification,productsController.getProductByOwner)
 
 //********* Ruta de los usuarios
 const userController = require('../controllers/users.controller')

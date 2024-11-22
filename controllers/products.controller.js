@@ -29,9 +29,12 @@ exports.getOneProduct=async(req,res)=>{
 exports.addProduct=async(req,res)=>{
     try {
         let product = req.body
+        let ownerid = req.usuario.id
         let roll = req.usuario.roll
         if (roll == ("user")|| ("SuperAdmin")) {
+            
             let newProduct = new productModel(product);
+            newProduct.owner = ownerid
             await newProduct.save();
             res.json(newProduct);
         }else{
@@ -74,6 +77,20 @@ exports.updateProduct=async(req,res)=>{
             }
         }else{
             res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
+    }
+}
+exports.getProductByOwner=async(req, res)=>{
+    try {
+        let owner = req.params.id
+        if (owner.length==24) {
+            let myproducts = await productModel.find({owner:owner})
+            res.json(myproducts)
+        }else{
+            res.send({error:"ID incorrecto" });
         }
     } catch (error) {
         console.log(error);
