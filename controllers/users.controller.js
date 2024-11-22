@@ -37,7 +37,7 @@ exports.addUser=async(req,res)=>{
             let user = req.body
             let newUser = new userModel(user)
             await newUser.save()
-            res.status(201).json(newUser)
+            res.status(200).json(newUser)
         } else {
             res.status(400).send({msj:"Correo ya existe"})
         }
@@ -60,7 +60,7 @@ exports.deleteUser=async(req,res)=>{
                 res.status(200).json(deleteduser)
             }else{
                 console.log("Usuario no encontrado");
-                res.send({error:"Usuario no encontrado"})
+                res.status(400).send({error:"Usuario no encontrado"})
             }
         }else{
             res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
