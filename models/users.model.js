@@ -22,6 +22,18 @@ const userModel = mongoose.Schema({
         required: true,
         default: 0
     },
+    direccion:{
+        type:String,
+        required: false,
+    },
+    ciudad:{
+        type:String,
+        required: false
+    },
+    dob:{
+        type:String,
+        required:false
+    },
     roll:{
         type:String,
         required:true,
