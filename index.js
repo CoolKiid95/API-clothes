@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 app.use(express.json())
+app.use(cors())
 require('dotenv').config()
 let PORT = process.env.PORT
 const router = require("./routes/router.js")
