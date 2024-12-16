@@ -22,7 +22,7 @@ const productModel = mongoose.Schema({
         required: false
     },
     imagen:{
-        type: String,
+        type: Array,
         required: true
     },
     descripcion:{
