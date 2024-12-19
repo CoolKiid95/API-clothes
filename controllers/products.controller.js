@@ -88,9 +88,9 @@ exports.updateProduct=async(req,res)=>{
 }
 exports.getProductByOwner=async(req, res)=>{
     try {
-        let owner = req.params.id
-        if (owner.length==24) {
-            let owner = await productModel.find({owner:owner})
+        let ownerid = req.params.id
+        if (ownerid.length==24) {
+            let owner = await productModel.find({owner:ownerid})
             res.json(owner)
         }else{
             res.status(400).send({error:"ID incorrecto" });
