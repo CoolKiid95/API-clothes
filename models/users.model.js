@@ -22,10 +22,27 @@ const userModel = mongoose.Schema({
         required: true,
         default: 0
     },
+    direccion:{
+        type:String,
+        required: false,
+    },
+    ciudad:{
+        type:String,
+        required: false
+    },
+    dob:{
+        type:String,
+        required:false
+    },
     roll:{
         type:String,
         required:true,
         default:"User"
+    },
+    imagen:{
+        type:String,
+        required:false,
+        default:"https://static.vecteezy.com/system/resources/previews/010/260/479/non_2x/default-avatar-profile-icon-of-social-media-user-in-clipart-style-vector.jpg"
     }
 },{
     versioKey: false,
