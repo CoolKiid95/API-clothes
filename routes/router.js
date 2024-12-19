@@ -12,8 +12,8 @@ router.get('/myproducts/:id',tokenverification,productsController.getProductByOw
 
 //********* Ruta de los usuarios
 const userController = require('../controllers/users.controller')
-router.get('/users', tokenverification ,userController.getusers)
-router.get('/user/:id', tokenverification,userController.getOneuser)
+router.get('/users' ,userController.getusers)
+router.get('/user/:id', userController.getOneuser)
 router.post('/adduser', userController.addUser)
 router.delete('/deleteuser/:id', tokenverification,userController.deleteUser)
 router.put('/updateuser/:id', tokenverification,userController.updateUser)
