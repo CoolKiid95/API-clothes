@@ -53,7 +53,6 @@ const userModel = mongoose.Schema({
 module.exports=mongoose.model('user', userModel)
 
 /*
-
 {
     "nombre":"Diego",
     "apellido":"Delgado",
@@ -62,5 +61,4 @@ module.exports=mongoose.model('user', userModel)
     "telefono":"3125302489",
     "roll":"SuperAdmin"
 }
-
     */
