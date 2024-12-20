@@ -43,6 +43,11 @@ const userModel = mongoose.Schema({
         type:String,
         required:false,
         default:"https://static.vecteezy.com/system/resources/previews/010/260/479/non_2x/default-avatar-profile-icon-of-social-media-user-in-clipart-style-vector.jpg"
+    },
+    favoritos:{
+        type:Array,
+        required:true,
+        default:""
     }
 },{
     versioKey: false,

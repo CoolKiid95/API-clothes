@@ -1,4 +1,5 @@
-const productModel = require("../models/products.model")
+const productModel = require("../models/products.model");
+const usersModel = require("../models/users.model");
 exports.getProducts=async(req,res)=>{
     try {
         let prenda = req.params.prenda
@@ -106,6 +107,7 @@ exports.getProductByOwner=async(req, res)=>{
         console.log(error);
         res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
     }
+    
 }
 
 exports.getProductByCategory=async(req, res)=>{
