@@ -1,4 +1,5 @@
-const productModel = require("../models/products.model")
+const productModel = require("../models/products.model");
+const usersModel = require("../models/users.model");
 exports.getProducts=async(req,res)=>{
     try {
         let dataproducts = await productModel.find();
