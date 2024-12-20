@@ -31,11 +31,9 @@ exports.addProduct=async(req,res)=>{
         let product = req.body
         let ownerid = req.usuario.id
         let roll = req.usuario.roll
-        console.log(ownerid, 'id')
-
-        console.log(product)
+        
         if (roll == ("user")|| ("SuperAdmin")) {
-            
+
             product.owner = ownerid
             let newProduct = new productModel(product);
             await newProduct.save();
@@ -90,13 +88,26 @@ exports.updateProduct=async(req,res)=>{
 }
 exports.getProductByOwner=async(req, res)=>{
     try {
-        let owner = req.params.id
-        if (owner.length==24) {
-            let myproducts = await productModel.find({owner:owner})
-            res.status(200).json(myproducts)
+        let ownerid = req.params.id
+        if (ownerid.length==24) {
+            let owner = await productModel.find({owner:ownerid})
+            res.json(owner)
         }else{
             res.status(400).send({error:"ID incorrecto" });
         }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
+    }
+}
+
+exports.getProductByCategory=async(req, res)=>{
+    try {
+        let categoria = req.params.Category
+        console.log(categoria);
+        let products = await productModel.find({tipo:categoria}).limit(4)
+        res.json(products)
+
     } catch (error) {
         console.log(error);
         res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})

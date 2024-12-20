@@ -15,6 +15,6 @@ exports.tokenverification = async (req, res, next)=>{
         })
     } catch (error) {
         console.log(error);
-        res.status(500).send({error: "Ha ocurrido algo comunicate con el admin"})
+        res.status(500).send({error: "Ha ocurrido algo comunicate con el admin, token issue"})
     }
 }
