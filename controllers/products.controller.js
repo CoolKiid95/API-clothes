@@ -8,9 +8,7 @@ exports.getProducts=async(req,res)=>{
         }else{
             let dataproducts = await productModel.find(); 
             res.status(200).json(dataproducts);
-        }
-
-
+        }   
         
     } catch (error) {
         console.log(error);
