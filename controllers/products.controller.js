@@ -31,6 +31,9 @@ exports.addProduct=async(req,res)=>{
         let product = req.body
         let ownerid = req.usuario.id
         let roll = req.usuario.roll
+        console.log(ownerid, 'id')
+
+        console.log(product)
         if (roll == ("user")|| ("SuperAdmin")) {
             
             product.owner = ownerid
