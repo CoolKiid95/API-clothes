@@ -18,7 +18,7 @@ router.get('/user/:id', userController.getOneuser)
 router.post('/adduser', userController.addUser)
 router.delete('/deleteuser/:id', tokenverification,userController.deleteUser)
 router.put('/updateuser/:id', tokenverification,userController.updateUser)
-router.get('/validar/:id', userController.validar)
+router.post('/validar/:id', userController.validar)
 
 
 //********* Inicio de sesion

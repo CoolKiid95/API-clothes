@@ -38,6 +38,7 @@ const productModel = mongoose.Schema({
         required:true,
         default:"asd"
     }
+    
 })
 module.exports = mongoose.model('product', productModel)
 
