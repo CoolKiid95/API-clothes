@@ -16,8 +16,8 @@ exports.login = async (req, res)=>{
                 }
                 let SECRET_KEY_JWT= process.env.SECRET_KEY_JWT
                 let token = jwt.sign(payload, SECRET_KEY_JWT, {expiresIn:"1h"})
-                sessionStorage.setItem("token",this.token)
-                res.status(200).json(token)
+                res.status(200).json({token:token, id:user._id})
+                
 
 
             }else{
