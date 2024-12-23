@@ -1,8 +1,16 @@
-const productModel = require("../models/products.model")
+const productModel = require("../models/products.model");
+const usersModel = require("../models/users.model");
 exports.getProducts=async(req,res)=>{
     try {
-        let dataproducts = await productModel.find();
-        res.status(200).json(dataproducts)
+        let prenda = req.params.prenda
+        if (prenda) {
+            let dataproducts = await productModel.find({nombre:{$regex:prenda, $options: 'i'}});
+            res.status(200).json(dataproducts)
+        }else{
+            let dataproducts = await productModel.find(); 
+            res.status(200).json(dataproducts);
+        }   
+        
     } catch (error) {
         console.log(error);
         res.status(500).send({ error: "Ha ocurrido algo inesperado, comuncate con el admin" });
@@ -99,13 +107,14 @@ exports.getProductByOwner=async(req, res)=>{
         console.log(error);
         res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
     }
+    
 }
 
 exports.getProductByCategory=async(req, res)=>{
     try {
         let categoria = req.params.Category
         console.log(categoria);
-        let products = await productModel.find({tipo:categoria}).limit(4)
+        let products = await productModel.find({tipo:categoria})
         res.json(products)
 
     } catch (error) {
