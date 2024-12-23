@@ -3,9 +3,9 @@ const router = express.Router()
 const { tokenverification } = require('../middleware/jwt')
 //**** Ruta de los productos
 const productsController = require('../controllers/products.controller')
-router.get('/products', productsController.getProducts)
+router.get('/products/:prenda?', productsController.getProducts)
 router.get('/product/:id', productsController.getOneProduct)
-router.post('/addproduct', productsController.addProduct)
+router.post('/addproduct',tokenverification, productsController.addProduct)
 router.delete('/deleteproduct/:id',tokenverification,productsController.deleteProduct)
 router.put('/updateproduct', tokenverification,productsController.updateProduct)
 router.get('/myproducts/:id',productsController.getProductByOwner)
@@ -13,8 +13,8 @@ router.get('/productbyCategory/:Category',productsController.getProductByCategor
 
 //********* Ruta de los usuarios
 const userController = require('../controllers/users.controller')
-router.get('/users', tokenverification ,userController.getusers)
-router.get('/user/:id',userController.getOneuser)
+router.get('/users' ,userController.getusers)
+router.get('/user/:id', userController.getOneuser)
 router.post('/adduser', userController.addUser)
 router.delete('/deleteuser/:id', tokenverification,userController.deleteUser)
 router.put('/updateuser/:id', tokenverification,userController.updateUser)

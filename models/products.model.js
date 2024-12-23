@@ -30,7 +30,7 @@ const productModel = mongoose.Schema({
         required: true
     },
     talla:{
-        type:Number,
+        type:String,
         required:false
     }, 
     owner:{
