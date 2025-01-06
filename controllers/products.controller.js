@@ -4,7 +4,7 @@ exports.getProducts=async(req,res)=>{
     try {
         let prenda = req.params.prenda
         if (prenda) {
-            let dataproducts = await productModel.find({nombre:{$regex:prenda, $options: 'i'}});
+            let dataproducts = await productModel.find({prenda:{$regex:prenda, $options: 'i'}});
             res.status(200).json(dataproducts)
         }else{
             let dataproducts = await productModel.find(); 
