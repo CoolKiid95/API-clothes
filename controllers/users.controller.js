@@ -1,5 +1,6 @@
 const userModel = require("../models/users.model")
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 exports.getusers=async(req,res)=>{
     try {
@@ -77,13 +78,17 @@ exports.updateUser=async(req,res)=>{
         let id = await req.params.id
         let body = req.body
         if (id.length == 24) {
+            console.log(body);
+            
             let user = await userModel.findById(id)
-            if (user) {
+            if (user){
                 Object.assign(user, body)
                 await userModel.findOneAndUpdate({_id:id}, user)
-                res.status(200).send("Usuario modificado correctamente")
+                res.send()
             }
         }else{
+            console.log(error);
+            
             res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
         }
     } catch (error) {
@@ -95,15 +100,17 @@ exports.updateUser=async(req,res)=>{
 exports.validar = async (req, res)=> {
     try {
         let id=req.params.id
-        let token = req.headers
+        console.log(id)
+        let token = req.body.token
+        console.log(token);
         let SECRET_KEY_JWT = process.env.SECRET_KEY_JWT
-        if (token) {
+        if (token){
             console.log(token)
+            console.log("Hi")
             
-            token = token.split(' ')[1]
-            
-            jwt.verify(token, SECRET_KEY_JWT, (error, decoded)=>{
-
+            jwt.verify(token, SECRET_KEY_JWT,(error, decoded)=>{
+                console.log(decoded);
+                
                 if (error) {
                     res.status(401).send({error:"Token invalido"})
                 }
