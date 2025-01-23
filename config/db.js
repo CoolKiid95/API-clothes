@@ -3,7 +3,6 @@ require('dotenv').config()
 const connectDB = async()=>{
     try {
         let mongoURI = process.env.DB_MONGO
-        console.log(mongoURI);
         
         await mongoose.connect(mongoURI)
         console.log("Conectado a la base de datos OK");
