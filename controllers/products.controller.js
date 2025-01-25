@@ -12,7 +12,7 @@ exports.getProducts=async(req,res)=>{
         }   
         
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({ error: "Ha ocurrido algo inesperado, comuncate con el admin" });
     }
 }
@@ -30,7 +30,7 @@ exports.getOneProduct=async(req,res)=>{
             res.status(400).send({ error: "ID incorrecto" });
         }
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({ error: "Ha ocurrido algo inesperado, comuncate con el admin" });
     }
 }
@@ -50,7 +50,7 @@ exports.addProduct=async(req,res)=>{
             res.status(500).send({error: "Roll no es el correcto"})
         }
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({ error: "Ha ocurrido algo inesperado, comuncate con el admin" });
     }
 }
@@ -69,7 +69,7 @@ exports.deleteProduct=async(req,res)=>{
             res.send({error: "No se encuentra ningun producto"})
         }   
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({ error: "Ha ocurrido algo inesperado, comuncate con el admin" });
     }
 }
@@ -90,7 +90,7 @@ exports.updateProduct=async(req,res)=>{
             res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
         }
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
     }
 }
@@ -104,7 +104,7 @@ exports.getProductByOwner=async(req, res)=>{
             res.status(400).send({error:"ID incorrecto" });
         }
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
     }
     
@@ -118,7 +118,7 @@ exports.getProductByCategory=async(req, res)=>{
         res.json(products)
 
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
     }
 }

@@ -4,17 +4,14 @@ require('dotenv').config()
 
 exports.getusers=async(req,res)=>{
     try {
-        let roll = req.usuario.roll     
-        if (roll == "SuperAdmin") {
+        
             let data = await userModel.find()
             res.status(200).json(data)
-        }else{
-            res.status(500).send({error: "Roll no es el correcto"})
-        }
+        
         
         
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({error:"Ha ocurrido un error comunicate con el admin"})
         
     }
@@ -25,7 +22,7 @@ exports.getOneuser=async(req,res)=>{
         let user = await userModel.findOne({_id:id})
         res.status(200).json(user)
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({error:"Ha ocurrido un error comunicate con el admin"})
     }
 }
@@ -48,7 +45,7 @@ exports.addUser=async(req,res)=>{
         res.status(400).send({error:"Correo Invalido"})
     }
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     res.status(500).send({error:"ha ocurrido un error comunicate con el admin"})
   }
 }
@@ -69,7 +66,7 @@ exports.deleteUser=async(req,res)=>{
             res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
         }
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({error:"ha ocurrido un error comunicate con el admin"})
     }
 }
@@ -84,7 +81,7 @@ exports.updateUser=async(req,res)=>{
             if (user){
                 Object.assign(user, body)
                 await userModel.findOneAndUpdate({_id:id}, user)
-                res.send()
+                return res.status(200).json({ok:true, msg:'usuario actualizado correctamente'})
             }
         }else{
             console.log(error);
@@ -92,7 +89,7 @@ exports.updateUser=async(req,res)=>{
             res.status(400).send({msj:"Id no contiene los caracteres sufucientes"})
         }
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         res.status(500).send({error:"Ha ocurrido un error, comunicate con el admin"})
     }
 }
@@ -100,14 +97,9 @@ exports.updateUser=async(req,res)=>{
 exports.validar = async (req, res)=> {
     try {
         let id=req.params.id
-        console.log(id)
         let token = req.body.token
-        console.log(token);
         let SECRET_KEY_JWT = process.env.SECRET_KEY_JWT
-        if (token){
-            console.log(token)
-            console.log("Hi")
-            
+        if (token){   
             jwt.verify(token, SECRET_KEY_JWT,(error, decoded)=>{
                 console.log(decoded);
                 
@@ -124,8 +116,7 @@ exports.validar = async (req, res)=> {
             res.status(400).send({error:"Token no proporcionado"})
         }
     } catch (error) {
-        
-        
+        console.log(error.message);
         res.status(500).send({error:error})
     }
 }
