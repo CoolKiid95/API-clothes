@@ -109,7 +109,6 @@ exports.getProductByOwner=async(req, res)=>{
     }
     
 }
-
 exports.getProductByCategory=async(req, res)=>{
     try {
         let categoria = req.params.Category
